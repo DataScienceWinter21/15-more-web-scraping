@@ -1,0 +1,132 @@
+---
+title: "More Web Scraping"
+author: "Bastola"
+date: "`r format(Sys.Date(), ' %B %d %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      collapse = TRUE, 
+                      comment=NA, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 4, fig.width = 6, fig.align='center')
+
+library(tidyverse) 
+library(lubridate)
+library(stringr)
+library(rvest)
+library(ggplot2movies)
+library(plotly)
+```
+
+
+## Your Turn 1
+
+### a. Scrape the [Minnesota covid incidence data table](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/minnesota).
+
+```{r}
+
+```
+
+### b. What are the top 10 counties in Minnesota by the number of COVID cases?
+
+```{r}
+
+```
+
+
+## Your Turn 2
+
+1. Go to the [the numbers webpage](https://www.the-numbers.com/movie/budgets/all) and extract the table on the front page.
+
+
+```{r}
+
+```
+
+
+2. Find out the number of pages that contain the movie table, while looking for the changes in the url in the address bar. How does the url changes when you go to the next page?
+
+*Answer:* 
+
+3. Write a for loop to store all the data in multiple pages to a single data frame.
+
+```{r}
+new_urls <- "https://www.the-numbers.com/movie/budgets/all/"
+
+# creating two empty data-frames
+
+table_new <-data.frame()
+df2 <- data.frame()
+
+# define indexes
+idx <-  seq(1, 6301, 100)
+
+for (i in 1:length(idx)) {
+  __________
+  __________
+  __________
+  __________
+}
+
+df2
+```
+
+
+4. Display the data table using `knitr::kable(data, format = "html")`
+
+```{r}
+knitr::kable(df2, format = ______)
+```
+
+
+5. Store the data in a `.csv` file with `write_csv(data_object, "/path/name.csv")`
+
+```{r}
+write_csv(df2, _________)
+```
+
+
+
+## Your Turn 3
+
+Use `geom_gitter()` to plot the number of real words versus the number of words in Trump tweets. Also, add the source of the tweets as the aesthetics to the plot. You may want to drop some values if they are NAs.
+
+```{r}
+tweets<- read_csv("https://raw.githubusercontent.com/deepbas/statdatasets/main/TrumpTweetData.csv")
+
+# ggplot code here
+
+ggplotly(______) 
+```
+
+
+## Your Turn 4
+
+```{r}
+mca <- data.frame(percent = c(23.5, 34.7, 19.8, 22.0, 27.6, 32.1, 20.2, 20.2, 26.0, 30.7, 22.1, 21.1), portfolio = factor(rep(c("Commodities", "Stocks", "Real State", "Other Assets"), 3), levels=c("Commodities", "Stocks", "Real State", "Other Assets")), year = rep(c("2019","2020","2021"), each=4))
+
+glimpse(mca)
+
+```
+
+Make a side-by-side bar chart to plot the percent invested versus year for different types of investment portfolios.
+
+```{r}
+mybar <- ggplot(mca, aes(x=year, y=percent, fill=_____)) + 
+  labs(title="___________") +
+  geom_bar(stat = "________", position = "_______") +
+  theme(legend.position = "______") + 
+  scale_fill_viridis_d()
+ggplotly(_____) 
+
+```
+
+
+
